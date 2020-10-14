@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>test</title>
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script>
+        angular.module("varukorgApp", [])
+               .controller("varukorgController", function ($scope) {
+                   $scope.varukorg = [];
+                   $scope.varor = [{ namn: "Iphone 11 pro" }, { namn: "Iphone X" }, { namn: "Iphone XS Max" }];
+                   $scope.valdAntal = 1;
+                   $scope.antal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                   $scope.laggTillVara = function () {
+                       $scope.varukorg.push({ namn: $scope.valdVara.namn, antal: $scope.valdAntal });
+                       console.dir($scope.varukorg);
+                   };
+
+               });
+               
+    </script>
+</head>
+<body ng-app="varukorgApp" ng-controller="varukorgController">
+    <form>
+        <strong>Produkt</strong><select ng-model="valdVara" ng-options="vara.namn for vara in varor"></select><br />
+        <strong>Antal</strong> <select ng-model="valdAntal" ng-options="a for a in antal"></select><br />
+        <button type="button" ng-click="laggTillVara()">Lägg i varukorg</button>
+        <div>
+            <h2>Varukorg</h2>
+            <ul ng-repeat="vara in varukorg">
+                <li ng-class="translateColor(vara.farg)">{{vara.antal}} stycken {{vara.namn}}</li>
+            </ul>
+        </div>
+    </form>
+    
+
+    
+</body>
+</html>
